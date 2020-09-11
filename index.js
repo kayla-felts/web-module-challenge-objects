@@ -1,17 +1,41 @@
 ///////////////Menu Items (MVP)///////////////////
 
 const latte = {name: "Cafe Latte", price: 4, category: "Drinks"};
-const burger = {name: "Burger", price: 18, category: "Lunch"};
+const burger = {name: "Burger", price: 18, category: "Lunch", special: function(customer){if(customer === 'teacher' || customer === 'student'){
+    return 18 * .75;
+    } else {
+    return 18 * .9;
+    }
+   } 
+  }
 const breakfastBurrito = {name: "Breakfast Burrito", price: 16, category:"Breakfast"};
 
 /* Task 1a: write a function to return more menu items with the same format as the items above. */
 
 function createMenuItem(name, price, category){
-    /* Code here */
+     return `name: ${name} price: ${price} category: ${category}`
 }
+console.log(createMenuItem(latte.name, latte.price, latte.category))
 
 /* Task 1b: use your function to create 3 more menu items. You may add any items to the menu that you'd like */
+const chkSand =  Object.create(latte);
+    chkSand.name = 'Chicken Sandwich';
+    chkSand.price = 15
+    chkSand.category = 'Lunch'
 
+const chzCake = Object.create(burger);
+    chzCake.name = 'Cheese Cake';
+    chzCake.price = 25;
+    chzCake.category = 'Dessert';
+
+    const mlkShk = Object.create(breakfastBurrito);
+    mlkShk.name = 'Milk Shake';
+    mlkShk.price = 15
+    mlkShk.category = 'Drinks';
+
+console.log(createMenuItem(chkSand.name, chkSand.price, chkSand.category))
+console.log(createMenuItem(chzCake.name,chzCake.price,chzCake.category))
+console.log(createMenuItem(mlkShk.name, mlkShk.price, mlkShk.category))
 
 
 /* Task 2: You're having a lunch special! 25% off for teachers and students, 10% off for everyone else. Add a method to your burger object that automatically calculates price given a string as a parameter. 
@@ -23,6 +47,12 @@ Your method should accept:
 and should return a number. 
 
 For example, burger.discount("teacher") would return 13.5 and burger.discount("public") would return 16.2*/
+
+//the code for this is written in the top with the burger obj, I could not figure out how to make it work down here, but it works.
+
+  console.log(burger.special('public'))
+  console.log(burger.special('student'))
+  console.log(burger.special('teacher'))
 
 
 
@@ -39,10 +69,19 @@ const reviews = [{name: "Daniela", rating: 5, feedback:"Beautiful atmosphere and
 ]
 
 /* Task 3: Console.log just Julius' feedback */
+let hisName = []
+for(let i = 0; i < reviews.length; i++){
+  if(reviews[i].name === 'Julius'){
+    hisName.push(reviews[i]);
+  }
+}
+console.log(hisName[0].feedback)
 
 
 /* Task 4: Add a new rating with your (fictitious) opinions of the restaurant in the same format as the reviews above. */
 
+console.log(reviews.push('Kayla', 5, 'Absoluetly amazing! Perfect place to propose......a divorce!!!'))
+console.log(reviews.pop())
 
 /* Task 5: Add the following feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"
 
@@ -58,10 +97,10 @@ and should return a string in the format `{name} gave the restaurant a {rating},
  * For example, if getReviewByIndex is invoked with reviews and the number 0
  * it will return `Daniela gave the restaurant a 5 star review and their feedback was: Beautiful atmosphere and wonderful vegan options!`
 */
-function getReviewByIndex(reviews, index) {
-    /* code here */
-  }
-  
+function getReviewByIndex(reviews,index) {
+    return `${reviews.name} gave the restaraunt a ${reviews.rating}, and their feedback was: ${reviews.feedback}.`
+}
+console.log(getReviewByIndex(reviews[5]))  
 
 /* Task 7: Write a function to get information about the most recent review called `getLastReview`
 
@@ -72,10 +111,11 @@ and should return a string in the format `name} gave the restaurant a {rating}, 
 
 For example, if getLastReview is invoked passing the reviews array it will return `Reyna gave the restaurant a 3.5 star review and their feedback was: "this place is chill with really cool people, great for getting work done on weekdays"`.
 */
-function getLastReview(/* code here */) {
-    /* code here */
+function getLastReview(reviews) {
+  reviews = reviews.pop()
+    return `${reviews.name} gave the restaraunt a ${reviews.rating}, and their feedback was: ${reviews.feedback}.`
   } 
-
+console.log(getLastReview(reviews))
 
 ///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
 
